@@ -34,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AuthenticatedLdapAuthenticationHandlerTests extends BaseLdapAuthenticationHandlerTests {
     @Test
     public void verifyAuthenticateNotFound() {
-        assertThrows(AccountNotFoundException.class, () -> this.handler.forEach(
+        assertThrowsWithRootCause(UncheckedException.class, AccountNotFoundException.class, () -> this.handler.forEach(
             Unchecked.consumer(h -> h.authenticate(new UsernamePasswordCredential("notfound", "badpassword")))));
     }
 
