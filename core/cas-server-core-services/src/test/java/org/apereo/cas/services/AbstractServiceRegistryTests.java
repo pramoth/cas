@@ -19,6 +19,7 @@ import org.jooq.lambda.Unchecked;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -129,7 +130,8 @@ public abstract class AbstractServiceRegistryTests {
 
     @ParameterizedTest
     @MethodSource("getParameters")
-    public void verifyUpdatingServices(final Class<? extends RegisteredService> registeredServiceClass) {
+    public void verifyUpdatingServices(final Class<? extends RegisteredService> registeredServiceClass, final TestInfo info) {
+        info.
         this.serviceRegistry.save(buildRegisteredServiceInstance(200, registeredServiceClass));
         val services = this.serviceRegistry.load();
         assertFalse(services.isEmpty());
